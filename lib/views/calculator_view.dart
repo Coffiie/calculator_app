@@ -249,21 +249,29 @@ class CalculatorView extends StatelessWidget {
               )),
             ],
           ),
-          Positioned(
-              right: 16,
-              top: 16,
-              child: ElevatedButton(
-                child: const Text('Change Theme'),
-                onPressed: () {
-                  if (themeProvider.themeMode == ThemeMode.system) {
-                    themeProvider.themeMode = ThemeMode.dark;
-                  } else if (themeProvider.themeMode == ThemeMode.dark) {
-                    themeProvider.themeMode = ThemeMode.light;
-                  } else {
-                    themeProvider.themeMode = ThemeMode.dark;
-                  }
-                },
-              )),
+          Consumer<ThemeProvider>(
+            builder: (context, themeProvider, _) {
+              return Positioned(
+                  right: 16,
+                  top: 16,
+                  child: ElevatedButton(
+                    child: themeProvider.themeMode == ThemeMode.system
+                        ? const Icon(Icons.dark_mode)
+                        : themeProvider.themeMode == ThemeMode.dark
+                            ? const Icon(Icons.light_mode)
+                            : const Icon(Icons.dark_mode),
+                    onPressed: () {
+                      if (themeProvider.themeMode == ThemeMode.system) {
+                        themeProvider.themeMode = ThemeMode.dark;
+                      } else if (themeProvider.themeMode == ThemeMode.dark) {
+                        themeProvider.themeMode = ThemeMode.light;
+                      } else {
+                        themeProvider.themeMode = ThemeMode.dark;
+                      }
+                    },
+                  ));
+            }
+          ),
         ],
       ),
     ));
