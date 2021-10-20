@@ -1,3 +1,4 @@
+import 'package:calculator_ui/providers/calculator_provider.dart';
 import 'package:calculator_ui/providers/theme_provider.dart';
 import 'package:calculator_ui/views/calculator_view.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        ChangeNotifierProvider(create: (_) => CalculatorProvider()),
       ],
       child: MyApp(),
     ),
