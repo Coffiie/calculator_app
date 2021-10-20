@@ -39,11 +39,10 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         themeMode: themeProvider.themeMode,
         darkTheme: ThemeData.dark().copyWith(
-          elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ElevatedButton.styleFrom(
+            elevatedButtonTheme: ElevatedButtonThemeData(
+                style: ElevatedButton.styleFrom(
               primary: Colors.black45,
-            )
-          ),
+            )),
             textTheme:
                 GoogleFonts.montserratTextTheme(Typography.whiteRedmond)),
         theme: ThemeData(
