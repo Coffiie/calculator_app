@@ -1,4 +1,6 @@
+import 'package:calculator_ui/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 enum OperandType { number, operator, nonOperator }
 
@@ -18,7 +20,8 @@ class ButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(MediaQuery.of(context).platformBrightness);
+    final ThemeProvider themeProvider =
+        Provider.of<ThemeProvider>(context, listen: false);
     final Size screenSize = MediaQuery.of(context).size;
     return Stack(
       children: [
@@ -26,9 +29,12 @@ class ButtonWidget extends StatelessWidget {
             ? Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(50),
-                    boxShadow:  [
+                    boxShadow: [
                       BoxShadow(
-                          color: MediaQuery.of(context).platformBrightness == Brightness.dark ? Theme.of(context).primaryColor : Colors.grey,
+                          color: themeProvider.themeMode ==
+                                ThemeMode.dark
+                              ? Theme.of(context).primaryColor
+                              : Colors.grey,
                           spreadRadius: 1,
                           blurRadius: 10,
                           offset: const Offset(-5, 0))
@@ -39,13 +45,20 @@ class ButtonWidget extends StatelessWidget {
                 height: screenSize.height * 0.1,
               )
             : Container(
-                decoration: BoxDecoration(boxShadow:  [
-                  BoxShadow(
-                      color:  MediaQuery.of(context).platformBrightness == Brightness.dark ? Theme.of(context).primaryColor : Colors.grey,
-                      spreadRadius: 1,
-                      blurRadius: 10,
-                      offset: const Offset(5, 0))
-                ], shape: BoxShape.circle, color:Theme.of(context).primaryColor,),
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                        color: themeProvider.themeMode ==
+                                ThemeMode.dark
+                            ? Theme.of(context).primaryColor
+                            : Colors.grey,
+                        spreadRadius: 1,
+                        blurRadius: 10,
+                        offset: const Offset(5, 0))
+                  ],
+                  shape: BoxShape.circle,
+                  color: Theme.of(context).primaryColor,
+                ),
                 width: screenSize.width * 0.2,
                 height: screenSize.height * 0.1,
               ),
