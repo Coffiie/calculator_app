@@ -37,50 +37,55 @@ class CalculatorService {
   }
 
   double calculate(List<String> operatorsList, List<String> operandsList) {
-    operandsList = _handlePercentage(operandsList);
-    while (operatorsList.isNotEmpty) {
-      String operator = '/';
-      int index = operatorsList.indexOf(operator);
-      double result = _evaluate(index, operandsList, operandsList, operator);
-      if (result != -1) {
-        operandsList.removeAt(index + 1);
-        operandsList[index] = result.toString();
-        operatorsList.removeAt(index);
-        continue;
+    try {
+      operandsList = _handlePercentage(operandsList);
+      while (operatorsList.isNotEmpty) {
+        String operator = '/';
+        int index = operatorsList.indexOf(operator);
+        double result = _evaluate(index, operandsList, operandsList, operator);
+        if (result != -1) {
+          operandsList.removeAt(index + 1);
+          operandsList[index] = result.toString();
+          operatorsList.removeAt(index);
+          continue;
+        }
+      
+        operator = '*';
+        index = operatorsList.indexOf(operator);
+        result = _evaluate(index, operandsList, operandsList, operator);
+        if (result != -1) {
+          operandsList.removeAt(index + 1);
+          operandsList[index] = result.toString();
+          operatorsList.removeAt(index);
+          continue;
+        }
+      
+        operator = '+';
+        index = operatorsList.indexOf(operator);
+        result = _evaluate(index, operandsList, operandsList, operator);
+        if (result != -1) {
+          operandsList.removeAt(index + 1);
+          operandsList[index] = result.toString();
+          operatorsList.removeAt(index);
+          continue;
+        }
+      
+        operator = '-';
+        index = operatorsList.indexOf(operator);
+        result = _evaluate(index, operandsList, operandsList, operator);
+        if (result != -1) {
+          operandsList.removeAt(index + 1);
+          operandsList[index] = result.toString();
+          operatorsList.removeAt(index);
+          continue;
+        }
       }
-
-      operator = '*';
-      index = operatorsList.indexOf(operator);
-      result = _evaluate(index, operandsList, operandsList, operator);
-      if (result != -1) {
-        operandsList.removeAt(index + 1);
-        operandsList[index] = result.toString();
-        operatorsList.removeAt(index);
-        continue;
-      }
-
-      operator = '+';
-      index = operatorsList.indexOf(operator);
-      result = _evaluate(index, operandsList, operandsList, operator);
-      if (result != -1) {
-        operandsList.removeAt(index + 1);
-        operandsList[index] = result.toString();
-        operatorsList.removeAt(index);
-        continue;
-      }
-
-      operator = '-';
-      index = operatorsList.indexOf(operator);
-      result = _evaluate(index, operandsList, operandsList, operator);
-      if (result != -1) {
-        operandsList.removeAt(index + 1);
-        operandsList[index] = result.toString();
-        operatorsList.removeAt(index);
-        continue;
-      }
+      
+      return double.parse(operandsList[0]);
+    } on Exception catch (e) {
+      // TODO
+      return -1;
     }
-
-    return double.parse(operandsList[0]);
   }
 
   double _evaluate(int index, List<String> operatorsList,
